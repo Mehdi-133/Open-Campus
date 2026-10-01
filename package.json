@@ -1,0 +1,32 @@
+{
+  "name": "open-campus",
+  "version": "1.0.0",
+  "description": "Backend API for the Open Campus LMS",
+  "type": "module",
+  "main": "src/server.js",
+  "scripts": {
+    "dev": "nodemon src/server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Mehdi-133/Open-Campus.git"
+  },
+  "keywords": [
+    "lms",
+    "nodejs",
+    "express",
+    "mongodb"
+  ],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Mehdi-133/Open-Campus/issues"
+  },
+  "homepage": "https://github.com/Mehdi-133/Open-Campus#readme",
+  "dependencies": {
+    "express": "^5.2.1"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.14"
+  }
+}
