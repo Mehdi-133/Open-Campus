@@ -1,6 +1,6 @@
 import { z } from "zod";
 
-export const createResourceSchema = z.object({
+const validateResource = z.object({
   moduleId: z.string().min(1, "Module ID is required"),
 
   title: z.string().trim().min(1, "Title is required"),
@@ -29,3 +29,5 @@ export const createResourceSchema = z.object({
 
   order: z.number().int().min(1, "Order must be at least 1"),
 });
+
+export default validateResource;
