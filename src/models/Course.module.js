@@ -57,7 +57,8 @@ const courseSchema = new mongoose.Schema(
     trainerId: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "User",
-      required: true,
+      required: false,
+      default: null,
     },
 
     publishedAt: {
@@ -67,7 +68,7 @@ const courseSchema = new mongoose.Schema(
   },
   {
     timestamps: true,
-  }
+  },
 );
 
 const Course = mongoose.model("Course", courseSchema);
