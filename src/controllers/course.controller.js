@@ -4,7 +4,9 @@ import mongoose from "mongoose";
 class CourseController {
   async index(req, res, next) {
     try {
-      const courses = await CourseRepo.getPublished();
+      const { category, level } = req.query;
+      const courses = await CourseRepo.getPublished({ category, level });
+
       return res.status(200).json({
         success: true,
         count: courses.length,

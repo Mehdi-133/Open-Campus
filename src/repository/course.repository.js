@@ -2,8 +2,20 @@ import Course from "../models/Course.module.js";
 import Module from "../models/Module.module.js";
 
 class CourseRepo {
-  async getPublished() {
-    return Course.find({ status: "published" });
+  async getPublished({ category, level } = {}) {
+    const filters = {
+      status: "published",
+    };
+
+    if (category) {
+      filters.category = category;
+    }
+
+    if (level) {
+      filters.level = level;
+    }
+
+    return Course.find(filters);
   }
 
   async getPublishedById(courseId) {
