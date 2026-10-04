@@ -4,8 +4,12 @@ import mongoose from "mongoose";
 class CourseController {
   async index(req, res, next) {
     try {
-      const { category, level } = req.query;
-      const courses = await CourseRepo.getPublished({ category, level });
+      const { category, level, keyword } = req.query;
+      const courses = await CourseRepo.getPublished({
+        category,
+        level,
+        keyword,
+      });
 
       return res.status(200).json({
         success: true,

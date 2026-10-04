@@ -1,8 +1,12 @@
 import Course from "../models/Course.module.js";
 import Module from "../models/Module.module.js";
 
+const escapeRegExp = (value) => {
+  return value.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+};
+
 class CourseRepo {
-  async getPublished({ category, level } = {}) {
+  async getPublished({ category, level, keyword } = {}) {
     const filters = {
       status: "published",
     };
@@ -13,6 +17,16 @@ class CourseRepo {
 
     if (level) {
       filters.level = level;
+    }
+
+    if (typeof keyword === "string" && keyword.trim()) {
+      const keywordPattern = new RegExp(escapeRegExp(keyword.trim()), "i");
+
+      filters.$or = [
+        { title: keywordPattern },
+        { shortDescription: keywordPattern },
+        { description: keywordPattern },
+      ];
     }
 
     return Course.find(filters);
