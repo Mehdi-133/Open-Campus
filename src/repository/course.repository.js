@@ -5,8 +5,16 @@ const escapeRegExp = (value) => {
   return value.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
 };
 
+const allowedSortFields = ["createdAt", "publishedAt"];
+
 class CourseRepo {
-  async getPublished({ category, level, keyword } = {}) {
+  async getPublished({
+    category,
+    level,
+    keyword,
+    sortBy,
+    order = "desc",
+  } = {}) {
     const filters = {
       status: "published",
     };
@@ -29,7 +37,14 @@ class CourseRepo {
       ];
     }
 
-    return Course.find(filters);
+    const query = Course.find(filters);
+
+    if (allowedSortFields.includes(sortBy)) {
+      const sortDirection = order === "asc" ? 1 : -1;
+      query.sort({ [sortBy]: sortDirection });
+    }
+
+    return query;
   }
 
   async getPublishedById(courseId) {

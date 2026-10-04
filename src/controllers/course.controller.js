@@ -4,11 +4,13 @@ import mongoose from "mongoose";
 class CourseController {
   async index(req, res, next) {
     try {
-      const { category, level, keyword } = req.query;
+      const { category, level, keyword, sortBy, order } = req.query;
       const courses = await CourseRepo.getPublished({
         category,
         level,
         keyword,
+        sortBy,
+        order,
       });
 
       return res.status(200).json({
